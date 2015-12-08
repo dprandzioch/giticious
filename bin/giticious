@@ -1,0 +1,12 @@
+#!/usr/bin/ruby
+require 'thor'
+
+THIS_FILE = File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__
+require File.join(File.dirname(THIS_FILE), '../lib/giticious.rb')
+
+require File.join(File.dirname(THIS_FILE), '../lib/giticious/cli/repo.rb')
+require File.join(File.dirname(THIS_FILE), '../lib/giticious/cli/pubkey.rb')
+require File.join(File.dirname(THIS_FILE), '../lib/giticious/cli/user.rb')
+require File.join(File.dirname(THIS_FILE), '../lib/giticious/cli/main.rb')
+
+Giticious::Cli::Main.start(ARGV)
