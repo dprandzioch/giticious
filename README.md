@@ -1,4 +1,4 @@
-= Giticious - Maybe the most lightweight Git Server
+# Giticious - Maybe the most lightweight Git Server
 
 Giticious is a Ruby CLI tool that allows you to host multiple Git repositories with User Management/Access Control
 almost effortlessly.
@@ -7,11 +7,11 @@ Repositories are served through SSH using public key authentication. All you nee
 port 22 and Ruby >= 2.0 as well as a separate system user to host your Git repositories.
 
 
-== Installation
+## Installation
 
 While Giticious should run on almost any GNU/Linux distribution, a installation script currently only exists for Ubuntu 15.04 Vivid Vervet.
 
-=== Ubuntu 15.04 (Vivid Vervet)
+### Ubuntu 15.04 (Vivid Vervet)
 
 Log in as a user with privileges to run commands with `sudo` and run:
 
@@ -22,7 +22,7 @@ curl -s https://raw.githubusercontent.com/dprandzioch/giticious/master/install/u
 Then follow the instruction on the screen.
 
 
-=== Other GNU/Linux distros
+### Other GNU/Linux distros
 
 Just run
 
@@ -39,7 +39,7 @@ giticious init
 Make sure that SSH is running on port 22 and allows PubkeyAuthentication.
 
 
-== Usage
+## Usage
 
 Usage is as easy as this:
 
@@ -108,6 +108,6 @@ git clone dprandzioch@<your-server-url>:mytestrepo.git
 ```
 
 
-== License
+## License
 
 Giticious is released under the terms of the MIT Expat license, so feel free to use it for your projects :-)
