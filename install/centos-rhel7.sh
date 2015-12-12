@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yum install git ruby ruby-devel rubygems rubygem-bundler sqlite-devel gcc-c++
+yum install -y git ruby ruby-devel rubygems rubygem-bundler sqlite-devel gcc-c++
 gem install giticious
 
 echo "Please start SSH service on port 22 and enable PubkeyAuthentication."
