@@ -19,8 +19,7 @@ Vagrant.configure(2) do |config|
     box.vm.box = "centos/7"
 
     box.vm.provision "shell", inline: <<-SHELL
-      sudo yum install -y git ruby ruby-devel rubygems rubygem-bundler sqlite-devel gcc-c++
-      sudo gem install rake
+      sudo yum install -y git ruby ruby-devel rubygems rubygem-bundler rubygem-rake sqlite-devel gcc-c++
       cd /vagrant
       sudo bundle install
     SHELL
