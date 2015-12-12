@@ -10,9 +10,7 @@ module Giticious
             exit 1
           end
 
-          giticious_path = File.realpath(File.join(Giticious::LIBDIR, "..", "..", "bin", "giticious"))
-
-          if Giticious::Service::Pubkey.new.add(username, pubkey, giticious_path)
+          if Giticious::Service::Pubkey.new.add(username, pubkey)
             puts "Public key \"#{pubkey.split(//).last(80).join}\" for user #{username} has been added!"
           end
 

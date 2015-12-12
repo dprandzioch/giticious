@@ -43,10 +43,16 @@ module Giticious
         perms = Giticious::Service::Repository.new.permissions_for(repo, user)        
         abort "You have no access to #{repo}" if perms == false
 
+        puts "action"
+        puts action
+
         command = "#{command_match[1]} 'repositories/#{command_match[2]}.git'"
 
         abort "Read access denied" unless perms.perm_read
-        abort "Write access denied" unless action == "git-receive-pack" and perms.perm_write
+
+        if action == "git-receive-pack"
+          abort "Write access denied" unless and perms.perm_write
+        end
 
         Kernel.exec "git", "shell", "-c", command
       end

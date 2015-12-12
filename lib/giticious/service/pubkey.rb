@@ -24,12 +24,12 @@ module Giticious
         false
       end
 
-      def add(user, pubkey, giticious_path)
+      def add(user, pubkey)
         if exists?(pubkey)
           raise RuntimeError, "This public key does already exist"
         end
 
-        append_line('command="' + giticious_path + ' gitserve ' + user + '",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ' + pubkey)
+        append_line('command="/usr/local/bin/giticious gitserve ' + user + '",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ' + pubkey)
       end
 
       def delete(pubkey)
