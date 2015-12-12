@@ -33,10 +33,12 @@ module Giticious
       desc "gitserve", "Hidden task to serve git ssh requests", hide: true
       def gitserve(user)
         abort unless user
+        abort if ENV["SSH_ORIGINAL_COMMAND"].nil?
 
         command_match = ENV["SSH_ORIGINAL_COMMAND"].match(/(git\-upload\-pack|git\-receive\-pack) \'([A-Za-z0-9\-_\.]+)\.git\'/)
         abort "Project not found / Command invalid" if command_match.nil?
 
+        action = command_match[1]
         repo = command_match[2]
         perms = Giticious::Service::Repository.new.permissions_for(repo, user)        
         abort "You have no access to #{repo}" if perms == false
