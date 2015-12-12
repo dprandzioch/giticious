@@ -1,4 +1,4 @@
-# Giticious - Maybe the most lightweight Git Server
+# Giticious - Lightweight Git Server
 
 Giticious is a Ruby CLI tool that allows you to host multiple Git repositories with User Management/Access Control
 almost effortlessly.
@@ -17,6 +17,17 @@ Log in as a user with privileges to run commands with `sudo` and run:
 
 ```
 curl -s https://raw.githubusercontent.com/dprandzioch/giticious/master/install/ubuntu-vivid.sh | bash -s
+```
+
+Then follow the instruction on the screen.
+
+
+### CentOS 7 / RHEL 7
+
+Log in as a privileged user (sudo is not installed by default) and run:
+
+```
+curl -s https://raw.githubusercontent.com/dprandzioch/giticious/master/install/centos-rhel7.sh | bash -s
 ```
 
 Then follow the instruction on the screen.
