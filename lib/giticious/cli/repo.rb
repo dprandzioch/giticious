@@ -5,13 +5,21 @@ module Giticious
       desc "create NAME", "Create a new repository"
       def create(name)
         begin
-          if Giticious::Service::Repository.new.create(name) == false
-            $stderr.puts "Could not create repository"
-            exit 1
-          end
-
+          Giticious::Service::Repository.new.create(name)
           puts "The repository has been created"
+          list()
+        rescue => e
+          $stderr.puts e.message
+          exit 1
+        end
+      end
 
+      desc "import URL", "Create a repository and import the repository at this URL"
+      def import(url)
+        begin
+          puts "Importing #{url}..."
+          Giticious::Service::Repository.new.import(url)
+          puts "Repository imported"
           list()
         rescue => e
           $stderr.puts e.message

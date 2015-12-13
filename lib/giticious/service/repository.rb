@@ -6,11 +6,54 @@ module Giticious
         Giticious::Model::Repository.all
       end
 
+      def build_repo_path(name)
+        if name.empty?
+          raise ArgumentError, "repo name may not be empty"
+        end
+
+        "#{Dir.home}/repositories/#{name}.git"
+      end
+
+      def build_temp_path(name)
+        "#{Dir.home}/.giticious/temp_#{File.basename(name)}"
+      end
+
+      def import(url)
+        target_repo_name = File.basename(url).gsub(".git", "")
+        
+        if create(target_repo_name) == false
+          raise RuntimeError, "Could not create repository"
+        end
+
+        temp_name = build_temp_path(url)  
+
+        begin
+          new_url = build_repo_path(target_repo_name)
+
+          `git clone #{url} #{temp_name}`
+
+          if $?.success? == false
+            raise RuntimeError, "Could not clone repo URL"
+          end
+
+          `cd #{temp_name} && git remote add new #{new_url} && git push --all new`
+
+          if $?.success? == false
+            raise RuntimeError, "Could not import repo"
+          end
+        rescue => e
+          delete(target_repo_name)
+          raise e
+        finally
+          FileUtils.rm_rf(temp_name)
+        end
+      end
+
       def create(name)
-        path = "#{Dir.home}/repositories/#{name}.git"
+        path = build_repo_path(name)
 
         if init_repository(path) == false
-          raise RuntimeError, "Could not initi Git repository"
+          raise RuntimeError, "Could not init Git repository"
         end
 
         repo = Giticious::Model::Repository.new
@@ -28,7 +71,7 @@ module Giticious
         end
 
         Giticious::Model::Permission.where(repository_id: repo.id).delete_all
-        FileUtils.rm_rf("#{Dir.home}/repositories/#{repo.name}.git")
+        FileUtils.rm_rf(build_repo_path(repo.name))
 
         repo.delete
       end
