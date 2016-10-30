@@ -27,9 +27,13 @@ module Giticious
       end
 
       def delete_by_username(username)
-        user = Giticious::Model::User.find_by_user(username).first!
+        user = Giticious::Model::User.find_by_username(username)
 
-        Giticious::Model::Permission.find_by_user_id(user.id).delete_all!
+        if user.nil?
+          raise ArgumentError, "The selected user does not exist"
+        end
+
+        Giticious::Model::Permission.where(user_id: user.id).delete_all
 
         user.destroy!
       end
