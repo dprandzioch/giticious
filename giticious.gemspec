@@ -7,11 +7,11 @@ Gem::Specification.new do |spec|
   spec.name          = 'giticious'
   spec.version       = Giticious::VERSION
   spec.authors       = ['David Prandzioch']
-  spec.email         = ['kontakt@davidprandzioch.de']
-  spec.summary       = %q{Giticious is a simple Git with user management}
+  spec.email         = ['hello@davd.eu']
+  spec.summary       = %q{Giticious is a simple Git server with user management}
   spec.description   = ''
-  spec.homepage      = 'http://dprandzioch.github.io/giticious/'
-  spec.license       = 'MIT Expat'
+  spec.homepage      = 'https://github.com/dprandzioch/giticious'
+  spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = ['giticious']
